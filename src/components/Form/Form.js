@@ -7,7 +7,7 @@ import {
 } from "./Form.styled.jsx";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addContact } from "../../redux/operations";
+import { addContact } from "../AppBar/UserOptions";
 
 export const Form = () => {
   const [name, setName] = useState("");
@@ -21,8 +21,7 @@ export const Form = () => {
     const newContact = {
       name,
       number,
-      
-     // createdAt: Date.now()
+
     };
     const isContactExist = contacts.items.find((contact) => contact.name === name);
     if (isContactExist) {
