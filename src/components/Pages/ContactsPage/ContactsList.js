@@ -2,10 +2,10 @@ import {ContactsList,
   ContactItem,
   ContactName,
   ContactNumber,
-  DeleteButton} from "./ContactsRender.styled.jsx"
-import { deleteContact } from "../AppBar/UserOptions";
+  DeleteButton} from "./ContactsList.styled.jsx.js"
+import { deleteContact } from "../../Store/auth/thunks";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllContacts } from "../AppBar/UserOptions";
+import { getAllContacts } from "../../Store/auth/thunks";
 import { useEffect } from "react";
 
 export const ContactsRender = () => {
@@ -20,6 +20,7 @@ dispatch(getAllContacts());
 // console.log(contacts)
 return (
  <ContactsList>
+   <p>contacts page is here</p>
    { ( filteredContacts? filteredContacts : contacts).map(contact => (
      <ContactItem key={contact.id}>
      <ContactName> name: {contact.name},</ContactName><ContactNumber>tel: {contact.phone}</ContactNumber>

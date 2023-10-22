@@ -1,5 +1,5 @@
 import React from "react";
-import { FormContainerDiv, Label, Input } from "./Form/Form.styled.jsx";
+import { FormContainerDiv, Label, Input } from "./Forms/FormCreateContact/Form.styled.jsx";
 import { useDispatch } from "react-redux";
 import { setFilter } from "redux/filterSlice.js";
 

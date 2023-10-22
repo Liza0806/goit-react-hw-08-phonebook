@@ -7,9 +7,9 @@ import {
 } from "./Form.styled.jsx";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addContact } from "../AppBar/UserOptions";
+import { addContact } from "../../Store/auth/thunks";
 
-export const Form = () => {
+export const ContactForm = () => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
 
@@ -23,7 +23,7 @@ export const Form = () => {
       number,
 
     };
-    const isContactExist = contacts.items.find((contact) => contact.name === name);
+    const isContactExist = contacts?.items?.find((contact) => contact.name === name);
     if (isContactExist) {
       alert("Contact with such name already exists in the phonebook");
       reset();

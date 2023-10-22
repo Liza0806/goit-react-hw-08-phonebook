@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { handleFulfilled, handlePending, handleRejected } from './operations'
+import { handleFulfilled, handlePending, handleRejected } from '../components/Store/appState/helpers'
 import { initialState } from './state'
-import { getAllContacts, addContact, deleteContact } from '../components/AppBar/UserOptions'
+import { getAllContacts, addContact, deleteContact } from '../components/Store/auth/thunks'
 
  axios.defaults.baseURL = 'https://connections-api.herokuapp.com'
 
@@ -14,7 +14,7 @@ const contactsSlice = createSlice({
     builder
     .addCase(getAllContacts.fulfilled, (state, action) => {
       handleFulfilled(state, action, (payload) => payload);
-    
+    console.log(state.items, 'state.items in slice')
       state.items = action.payload;
 
     })

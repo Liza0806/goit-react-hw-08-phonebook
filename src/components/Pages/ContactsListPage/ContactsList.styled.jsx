@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const ContactsList = styled.ul`
+export const ContactsLists = styled.ul`
   list-style: none;
   padding: 0;
 `;
