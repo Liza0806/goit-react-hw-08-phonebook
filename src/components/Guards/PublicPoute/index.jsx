@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { authSelector } from "components/Store/auth/selector";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";

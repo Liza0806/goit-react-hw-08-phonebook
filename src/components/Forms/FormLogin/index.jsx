@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import {PageContainer, FormContainer, Label, Input, SubmitButton, OrText, LinkToRegistration } from './FormLogin.styled'
 
 const FormLogin = ({ login }) => {
