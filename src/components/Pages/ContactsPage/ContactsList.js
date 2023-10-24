@@ -17,10 +17,9 @@ const filteredContacts = contacts?.filter(contact => contact.name.toLowerCase().
 useEffect(() => {
 dispatch(getAllContacts());
 }, [dispatch]);
-// console.log(contacts)
+
 return (
  <ContactsList>
-   <p>contacts page is here</p>
    { ( filteredContacts? filteredContacts : contacts).map(contact => (
      <ContactItem key={contact.id}>
      <ContactName> name: {contact.name},</ContactName><ContactNumber>tel: {contact.phone}</ContactNumber>

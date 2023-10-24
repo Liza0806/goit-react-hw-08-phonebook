@@ -8,6 +8,7 @@ import {
 
 import { useSelector, useDispatch } from "react-redux";
 import { addContact } from "../../Store/auth/thunks";
+import toast from "react-hot-toast";
 
 export const ContactForm = () => {
   const [name, setName] = useState("");
@@ -25,11 +26,10 @@ export const ContactForm = () => {
     };
     const isContactExist = contacts?.items?.find((contact) => contact.name === name);
     if (isContactExist) {
-      alert("Contact with such name already exists in the phonebook");
+      toast.error("Contact with such name already exists in the phonebook", { duration: 3000, position: 'top-right' })
       reset();
       return;
     }
-   // console.log(newContact);
     dispatch(addContact(newContact));
     reset();
   };

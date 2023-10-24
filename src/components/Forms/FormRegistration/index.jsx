@@ -1,5 +1,14 @@
 
 import { Link } from 'react-router-dom'
+import {FormContainer,
+	FormContainerDiv,
+	Label,	
+	Input,
+	SubmitButton,
+	LinkToLogIn,
+	OrText,
+	PageContainer
+} from './FormRegistration.styled'
 const FormRegistration = ({ registration }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault()
@@ -11,52 +20,51 @@ const FormRegistration = ({ registration }) => {
 		})
 	}
 	return (
-		<div className='card p-5 mx-auto mt-5' style={{ width: 500 }}>
-			<Link to='/'>Back to home</Link>
-			<form onSubmit={handleSubmit}>
-				<div className='mb-3'>
-					<label htmlFor='exampleInputName' className='form-label'>
+		<PageContainer >
+			<FormContainer onSubmit={handleSubmit}>
+				<FormContainerDiv >
+					<Label htmlFor='exampleInputName'>
 						Name
-					</label>
-					<input
+					</Label>
+					<Input
 						type='text'
 						name='name'
-						className='form-control'
+					
 						id='exampleInputName'
 					/>
-				</div>
-				<div className='mb-3'>
-					<label htmlFor='exampleInputEmail1' className='form-label'>
+				</FormContainerDiv>
+				<FormContainerDiv>
+					<Label htmlFor='exampleInputEmail1' >
 						Email address
-					</label>
-					<input
+					</Label>
+					<Input
 						type='email'
 						name='email'
-						className='form-control'
+						
 						id='exampleInputEmail1'
 						aria-describedby='emailHelp'
 					/>
-					<div id='emailHelp' className='form-text'>
-						We'll never share your email with anyone else.
-					</div>
-				</div>
-				<div className='mb-3'>
-					<label htmlFor='exampleInputPassword1' className='form-label'>
+					
+				</FormContainerDiv>
+				<FormContainerDiv >
+					<Label htmlFor='exampleInputPassword1'>
 						Password
-					</label>
-					<input
+					</Label>
+					<Input
 						name='password'
 						type='password'
-						className='form-control'
+						
 						id='exampleInputPassword1'
 					/>
-				</div>
-				<button type='submit' className='btn btn-primary'>
+				</FormContainerDiv>
+				<SubmitButton type='submit'>
 					Registration
-				</button>
-			</form>
-			<Link to='/login'>Login</Link>
-		</div>
+				</SubmitButton>
+				<OrText>Or</OrText>
+			<LinkToLogIn to='/login'>Login</LinkToLogIn>
+			</FormContainer>
+			
+		</PageContainer>
 	)
 }
 

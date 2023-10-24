@@ -14,9 +14,7 @@ const contactsSlice = createSlice({
     builder
     .addCase(getAllContacts.fulfilled, (state, action) => {
       handleFulfilled(state, action, (payload) => payload);
-    console.log(state.items, 'state.items in slice')
       state.items = action.payload;
-
     })
       .addCase(getAllContacts.rejected, (state, action) => {
         handleRejected(state, action);
@@ -26,7 +24,6 @@ const contactsSlice = createSlice({
       })
       .addCase(addContact.fulfilled, (state, action) => {
         handleFulfilled(state, action, (payload) => [...state.items, payload]);
-//console.log(action.payload)
         state.items.push(action.payload) ;
       })
       .addCase(addContact.rejected, (state, action) => {

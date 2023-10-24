@@ -1,14 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { authSelector, profileSelector } from '../Store/auth/selector'
+import { useNavigate } from 'react-router-dom'
+import { authSelector } from '../Store/auth/selector'
 import { logOut } from '../Store/auth/slice'
 import { deleteToken } from '../../api/auth'
+import { HeaderContainer, HeaderBrand,  HeaderButton } from './Header.styled'
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
-	const navigate = useNavigate()
-	const isAuth = useSelector(authSelector)
-	const profile = useSelector(profileSelector)
-	const dispatch = useDispatch()
+	const navigate = useNavigate();
+	const isAuth = useSelector(authSelector);
+	const dispatch = useDispatch();
+	const location = useLocation(); 
+  
 
 	const handleClick = () => {
 		if (isAuth) {
@@ -18,38 +21,26 @@ const Header = () => {
 	}
 
 	return (
-		<nav className='navbar bg-dark mb-3'>
-			<div className='container-fluid'>
-				<p>header</p>
-				<NavLink className='navbar-brand mb-0 h1 text-success' to='/'>
-					Home
-				</NavLink>
+		<HeaderContainer>
 			
-				<NavLink className=' mb-0 mx-3 h3 text-white' to='/phonebook'>
-					phonebook
-				</NavLink>
+				{location.pathname !== '/' && <HeaderBrand to='/'>
+					Home
+				</HeaderBrand>}
+			
+				{location.pathname !== '/phonebook/*' && ( 
+          <HeaderBrand to='/phonebook/*'>
+            My phonebook
+          </HeaderBrand>
+        )}
 			
 				<div className='ms-5'>
-					{profile && (
-						<>
-							<h5 className='text-white'>{profile.firstName}</h5>
-							<button
-								onClick={() => navigate('/profile')}
-								className='btn btn-outline-warning ms-5'
-							>
-								Profile
-							</button>
-						</>
-					)}
-					<button
-						onClick={handleClick}
-						className='btn btn-outline-success ms-5'
-					>
+					<HeaderButton
+						onClick={handleClick}>
 						{isAuth ? 'Log Out' : 'Login'}
-					</button>
-				</div>
+					</HeaderButton>
+				
 			</div>
-		</nav>
+		</HeaderContainer>
 	)
 }
 

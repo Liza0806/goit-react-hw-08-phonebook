@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import {PageContainer, FormContainer, Label, Input, SubmitButton, OrText, LinkToRegistration } from './FormLogin.styled'
 
 const FormLogin = ({ login }) => {
 	const handleSubmit = (e) => {
@@ -10,42 +11,41 @@ const FormLogin = ({ login }) => {
 		})
 	}
 	return (
-		<div className='card p-5 mx-auto mt-5' style={{ width: 500 }}>
-			<Link to='/'>Back to home</Link>
+		<PageContainer>
 
-			<form onSubmit={handleSubmit}> 
-				<div className='mb-3'>
-					<label htmlFor='exampleInputEmail1' className='form-label'>
+			<FormContainer onSubmit={handleSubmit}> 
+				<div >
+					<Label htmlFor='exampleInputEmail1' >
 						Email address
-					</label>
-					<input
+					</Label>
+					<Input
 						type='email'
 						name='email'
-						className='form-control'
+					
 						id='exampleInputEmail1'
 						aria-describedby='emailHelp'
 					/>
-					<div id='emailHelp' className='form-text'>
-						We'll never share your email with anyone else.
-					</div>
+					
 				</div>
-				<div className='mb-3'>
-					<label htmlFor='exampleInputPassword1' className='form-label'>
+				<div >
+					<label htmlFor='exampleInputPassword1' >
 						Password
 					</label>
-					<input
+					<Input
 						name='password'
 						type='password'
-						className='form-control'
+					
 						id='exampleInputPassword1'
 					/>
 				</div>
-				<button type='submit' className='btn btn-primary'>
+				<SubmitButton type='submit'>
 					Login
-				</button>
-			</form>
-			<Link to='/registration'>Registration</Link>
-		</div>
+				</SubmitButton>
+				<OrText>Or</OrText>
+			</FormContainer>
+			
+			<LinkToRegistration to='/registration'>Registration</LinkToRegistration>
+		</PageContainer>
 	)
 }
 

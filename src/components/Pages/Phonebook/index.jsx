@@ -1,20 +1,17 @@
 import React from "react";
-// import { Route, Outlet } from 'react-router-dom';
-/// import Layout from '../../../Layout/index';
-import { ContactForm } from '../../Forms/FormCreateContact/index'; // Импортируйте компонент Form
-import{ ContactsList } from '../ContactsListPage/index'
+import { PageContainer } from "./Phonebook.styled";
+import { ContactForm } from '../../Forms/FormCreateContact/index'; 
+import { ContactsList } from '../ContactsListPage/index'
+import { SearchContactForm } from "../../Forms/FormSearchContact/index";
 
 export const Phonebook = () =>{
     return (
-        <div>
-            <p>My phonebook</p>
+        <PageContainer>
+        
             <ContactForm/>
+            <SearchContactForm/>
             <ContactsList/>
 
-
-            {/* <Outlet /> */}
-            {/* //// тут должен быть аддКонтакт ////
-            //// тут должен быть список контактов//// */}
-                  </div>
+                  </PageContainer>
     )
 }
