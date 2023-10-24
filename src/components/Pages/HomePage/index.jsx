@@ -1,11 +1,11 @@
 import { profileSelector } from '../../Store/auth/selector'
 import { useSelector } from 'react-redux'
-import { useNavigate  } from 'react-router-dom'
+// gimport { useNavigate  } from 'react-router-dom'
 import { HomePageContainer, Greeting, Description,WelcomeContainer, LinksForStart, GetStartedButton, WelcomeText, LinksContainer } from './HomePage.styled'
 
 const HomePage = () => {
 	const profile = useSelector(profileSelector)
-	const navigate = useNavigate()
+	// const navigate = useNavigate()
 	return ( <HomePageContainer>
 		<div className="area" >
             <ul className="circles">
