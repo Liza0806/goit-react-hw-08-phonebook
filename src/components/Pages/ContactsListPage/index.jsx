@@ -18,7 +18,7 @@ import {ContactsLists,
   useEffect(() => {
   dispatch(getAllContacts()
   );
-  }, []);
+  }, [dispatch]);
  
   return (
     <ContactsLists>

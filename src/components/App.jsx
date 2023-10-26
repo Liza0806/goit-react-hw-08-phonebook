@@ -9,7 +9,7 @@ import { Toaster } from 'react-hot-toast'
 import { PrivateRoute } from "./Guards/PrivateRoute";
 import { PublicRoute } from "./Guards/PublicPoute";
 import { useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { refreshThunk } from 'redux/thunks'
 
 const Login = lazy(() => import('./Pages/Login/index'))
