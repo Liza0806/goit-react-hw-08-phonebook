@@ -1,14 +1,16 @@
 import { Outlet } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import { refreshThunk } from 'components/Store/auth/thunks'
+// import { useDispatch } from 'react-redux'
+// import { useEffect, useState } from 'react'
+// import { refreshThunk } from 'redux/auth/thunks'
 
 const Layout = () => {
-	const dispatch = useDispatch()
+	// const dispatch = useDispatch()
 
-	 useEffect(() => {
-	 	dispatch(refreshThunk())
-	 }, [dispatch])
+
+	//  useEffect(() => {
+	//  	dispatch(refreshThunk())
+
+	//  }, [dispatch])
 
 	return (
 		<>

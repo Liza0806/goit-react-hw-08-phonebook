@@ -3,9 +3,9 @@ import {ContactsList,
   ContactName,
   ContactNumber,
   DeleteButton} from "./ContactsList.styled.jsx.js"
-import { deleteContact } from "../../Store/auth/thunks";
+import { deleteContact } from "../../../redux/thunks";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllContacts } from "../../Store/auth/thunks";
+import { getAllContacts } from "../../../redux/thunks";
 import { useEffect } from "react";
 
 export const ContactsRender = () => {

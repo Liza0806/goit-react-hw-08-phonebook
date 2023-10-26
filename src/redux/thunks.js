@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { signIn, signUp, getContacts, addCont, deleteCont, refresh } from '../../../api/auth'
+import { signIn, signUp, getContacts, addCont, deleteCont, refresh } from './api/auth'
 
 export const registrationThunk = createAsyncThunk(
 	'/users/signup',
@@ -28,6 +28,7 @@ export const refreshThunk= createAsyncThunk(
 	async (_, { rejectWithValue }) => {
 		try {
 			const data = await refresh()
+			
 		//	console.log(data, 'data in refresh')
 			return data
 		} catch (error) {

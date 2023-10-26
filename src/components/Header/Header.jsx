@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { authSelector } from '../Store/auth/selector'
-import { logOut } from '../Store/auth/slice'
-import { deleteToken } from '../../api/auth'
+import { authSelector } from '../../redux/auth/selector'
+import { logOut } from '../../redux/auth/slice'
+import { deleteToken } from '../../redux/api/auth'
 import { HeaderContainer, HeaderBrand,  HeaderButton } from './Header.styled'
 import { useLocation } from 'react-router-dom';
 
@@ -27,8 +27,8 @@ const Header = () => {
 					Home
 				</HeaderBrand>}
 			
-				{location.pathname !== '/phonebook/*' && ( 
-          <HeaderBrand to='/phonebook/*'>
+				{location.pathname !== '/phonebook' && ( 
+          <HeaderBrand to='/phonebook'>
             My phonebook
           </HeaderBrand>
         )}

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { handleFulfilled, handlePending, handleRejected } from '../components/Store/appState/helpers'
-import { initialState } from './state'
-import { getAllContacts, addContact, deleteContact } from '../components/Store/auth/thunks'
+import { handleFulfilled, handlePending, handleRejected } from './appState/helpers'
+import { initialState } from './appState/state'
+import { getAllContacts, addContact, deleteContact } from './thunks'
 
  axios.defaults.baseURL = 'https://connections-api.herokuapp.com'
 

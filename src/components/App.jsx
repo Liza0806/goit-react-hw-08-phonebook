@@ -8,11 +8,20 @@ import { Suspense, lazy } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { PrivateRoute } from "./Guards/PrivateRoute";
 import { PublicRoute } from "./Guards/PublicPoute";
+import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { refreshThunk } from 'redux/thunks'
 
 const Login = lazy(() => import('./Pages/Login/index'))
 const Registration = lazy(() => import('./Pages/Registration/index'))
 
 const App = () => { 
+  
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(refreshThunk())
+
+  }, [dispatch])
   return (
     <>
       <Toaster />
@@ -24,7 +33,7 @@ const App = () => {
           </Route>
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
           <Route path="/registration" element={<PublicRoute><Registration /></PublicRoute>} />
-          <Route path="/phonebook/*" element={
+          <Route path="/phonebook" element={
             <PrivateRoute>
               <Phonebook />
             </PrivateRoute>}>

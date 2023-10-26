@@ -7,7 +7,7 @@ import {
 } from "./Form.styled.jsx";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addContact } from "../../Store/auth/thunks";
+import { addContact } from "../../../redux/thunks";
 import toast from "react-hot-toast";
 
 export const ContactForm = () => {

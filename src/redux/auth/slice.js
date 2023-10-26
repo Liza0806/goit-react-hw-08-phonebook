@@ -3,8 +3,8 @@ import {
 	loginThunk,
 	refreshThunk,
 	registrationThunk,
-} from './thunks'
-import { setToken } from 'api/auth'
+} from '../thunks'
+import { setToken } from 'redux/api/auth'
 
 const initialState = {
 	token: '',
@@ -17,7 +17,8 @@ const handleAuthFulfilled = (state, { payload }) => {
 	state.profile = payload.user
 }
 const handleRefreshFulfilled = (state, { payload }) => {
-	setToken(state.token)
+	// console.log(state.token)
+	// setToken(state.token)
 	state.profile = payload
 }
 

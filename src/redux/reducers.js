@@ -2,8 +2,8 @@ import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
 import { appReducer } from './appState/slice'
 import { authReducer } from './auth/slice'
-import contactsReducer from '../../redux/contactsSlice'
-import filterReducer from '../../redux/filterSlice'
+import contactsReducer from './contactsSlice'
+import filterReducer from './filterSlice'
 
 
 const persistConfig = {
