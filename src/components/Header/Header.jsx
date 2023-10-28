@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { authSelector } from '../../redux/auth/selector'
-import { logOut } from '../../redux/auth/slice'
-import { deleteToken } from '../../redux/api/auth'
+import { logOut } from '../../redux/thunks'
+import { unSetToken } from '../../redux/thunks'
 import { HeaderContainer, HeaderBrand,  HeaderButton } from './Header.styled'
 import { useLocation } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const Header = () => {
 	const handleClick = () => {
 		if (isAuth) {
 			dispatch(logOut())
-			deleteToken()
+			unSetToken()
 		} else navigate('/login')
 	}
 

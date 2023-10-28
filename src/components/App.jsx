@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { refreshThunk } from 'redux/thunks'
 
+
 const Login = lazy(() => import('./Pages/Login/index'))
 const Registration = lazy(() => import('./Pages/Registration/index'))
 
@@ -19,8 +20,9 @@ const App = () => {
   
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(refreshThunk())
 
+  dispatch(refreshThunk())
+ 
   }, [dispatch])
   return (
     <>

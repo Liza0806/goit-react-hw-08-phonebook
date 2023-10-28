@@ -1,78 +1,137 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { signIn, signUp, getContacts, addCont, deleteCont, refresh } from './api/auth'
 
-export const registrationThunk = createAsyncThunk(
-	'/users/signup',
-	async (body, { rejectWithValue }) => {
-		try {
-			const data = await signUp(body)
-			return data
-		} catch (error) {
-			return rejectWithValue(error.response.data)
-		}
+import axios from 'axios'
+
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+
+export const setToken = (token) => {
+axios.defaults.headers.common.Authorization= `Bearer ${token}`
+}
+export const unSetToken = (token) => {
+	axios.defaults.headers.common.Authorization= ``
+}
+
+export const registrationThunk = createAsyncThunk('/users/signup',async credentials => {
+	try {
+		const {data} = await axios.post('/users/signup', credentials)
+		setToken(data.token)
+	//	console.log(data.token)
+		return data
 	}
-)
-export const loginThunk = createAsyncThunk(
-	'/users/login',
-	async (body, { rejectWithValue }) => {
-		try {
-			const data = await signIn(body)
-			return data
-		} catch (error) {
-			return rejectWithValue(error.response.data)
-		}
+	catch (error) {
+		console.log(error, 'error in registration');
+		throw error; 
+	  }
+})
+
+export const loginThunk = createAsyncThunk('/users/login', async credentials => {
+	try {
+		const { data } = await axios.post('/users/login', credentials)
+	// 	console.log(data.token)
+		setToken(data.token)
+		return data
+	} catch (error) {
+		console.log(error, 'error in login');
+		throw error; 
 	}
+}
+	
 )
-export const refreshThunk= createAsyncThunk(
+export const logOut = createAsyncThunk('/users/logout', async() => {
+try {
+await axios.post('/users/logout');
+unSetToken()
+
+}  catch (error) {
+	console.log(error, 'error in logout');
+	throw error; 
+}
+}
+
+)
+
+export const refreshThunk = createAsyncThunk(
 	'/users/current',
-	async (_, { rejectWithValue }) => {
-		try {
-			const data = await refresh()
-			
-		//	console.log(data, 'data in refresh')
-			return data
-		} catch (error) {
-			return rejectWithValue(error.response.data)
-		}
-	}
-)
+	async (_, thunkAPI) => {
+	
+	//	console.log(thunkAPI, 'thunkAPI', Date.now())
 
+	  const state = thunkAPI.getState();
 
-export const getAllContacts = createAsyncThunk(
-	'/contacts',
-	async (body, { rejectWithValue }) => {
-		try {
-			const data = await getContacts(body)
-			return data
-		} catch (error) {
-			return rejectWithValue(error.response.data)
-		}
-	}
-)
+	//  console.log(state, 'state',  Date.now())
+	 
 
-
-export const addContact = createAsyncThunk(
-	'contacts/addContact',
-	async (body, { rejectWithValue }) => {
-		try {
-			const data = await addCont(body)
-			return data
-		} catch (error) {
-			return rejectWithValue(error.response.data)
-		}
-	}
-)
-
+	  const persistedToken = state.auth.token;
+ // console.log(persistedToken, 'persistedToken',  Date.now() )
+	  if (persistedToken === null) {
+//		console.log('persistedToken === null',  Date.now());
+		return;
+	  }  
+	  setToken(persistedToken);
   
-export const deleteContact = createAsyncThunk(
-	'/contacts/{contactId}',
-	async (body, { rejectWithValue }) => {
-		try {
-			const data = await deleteCont(body)
-			return data
-		} catch (error) {
-			return rejectWithValue(error.response.data)
-		}
+	  try {
+		const { data } = await axios.get('/users/current');
+	//	console.log(data, 'data users in refresh',  Date.now())
+		return data;
+	  } catch (error) {
+		console.log(error, 'error in refresh',  Date.now());
+		throw error; 
+	  }
 	}
+  );
+  
 
-)
+  export const getAllContacts = createAsyncThunk('contacts', async (_, thunkAPI) => {
+	let state = thunkAPI.getState();
+	// console.log(state, 'state', Date.now());
+	const token = state.auth.token;
+	let isLoggedIn = state.auth.isLoggedIn;
+  
+	if (!token) {
+	  console.log('Token is null or undefined');
+	  return;
+	}
+  
+	
+	while (isLoggedIn !== true) {
+	  await new Promise(resolve => setTimeout(resolve, 100));
+	  state = thunkAPI.getState(); // Обновить состояние
+	  isLoggedIn = state.auth.isLoggedIn;
+	}
+  
+	try {
+	  const { data } = await axios.get('/contacts');
+	//  console.log(data, 'contacts data', Date.now());
+	  return data;
+	} catch (error) {
+	  console.log(error, 'error in get all', Date.now());
+	  throw error;
+	}
+  });
+ // В этом коде мы используем цикл while, чтобы проверять значение isLoggedIn. Когда isLoggedIn становится true, мы выходим из цикла и продолжаем выполнение запроса.
+  
+  
+  
+  
+  
+  
+export const addContact = createAsyncThunk('contacts/addContact', async credentials => {
+	try {
+		const { data } = await axios.post('contacts', credentials)
+		return data
+	} catch (error) {
+		console.log(error, 'error in add');
+		throw error; 
+	}
+})
+
+export const deleteContact = createAsyncThunk('/contacts/{contactId}', async id => {
+	try {
+		const { data } = await axios.delete(`/contacts/${id}`)
+		return data
+	} catch (error) {
+		console.log(error, 'error in deleteContact');
+		throw error; 
+	}
+})
+	

@@ -2,43 +2,43 @@ import { createSlice } from '@reduxjs/toolkit'
 import {
 	loginThunk,
 	refreshThunk,
-	registrationThunk,
+	registrationThunk, logOut
 } from '../thunks'
-import { setToken } from 'redux/api/auth'
+
 
 const initialState = {
 	token: '',
 	profile: null,
+	isLoggedIn: false,
 }
 
 const handleAuthFulfilled = (state, { payload }) => {
 	state.token = payload.token
-	setToken(payload.token)
 	state.profile = payload.user
+	state.isLoggedIn = true
 }
 const handleRefreshFulfilled = (state, { payload }) => {
-	// console.log(state.token)
-	// setToken(state.token)
 	state.profile = payload
+	state.isLoggedIn = true
 }
 
+const handleLogOutFulfilled=(state, { payload }) => {
+	state.profile = null
+	state.token = ''
+	state.isLoggedIn = false
+}
 
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
-	reducers: {
-		logOut: (state) => {
-			state.profile = null
-			state.token = ''
-		},
-	},
+
 	extraReducers: (builder) => {
 		builder
 			.addCase(registrationThunk.fulfilled, handleAuthFulfilled)
 			.addCase(loginThunk.fulfilled, handleAuthFulfilled)
 			.addCase(refreshThunk.fulfilled, handleRefreshFulfilled)
+			.addCase(logOut.fulfilled, handleLogOutFulfilled )
 	},
 })
 
 export const authReducer = authSlice.reducer
-export const { logOut } = authSlice.actions

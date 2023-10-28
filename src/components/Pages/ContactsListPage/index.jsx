@@ -11,7 +11,6 @@ import {ContactsLists,
   
   export const ContactsList = () => {
   const dispatch = useDispatch();
-  
   const contacts = useSelector((state) => state.contacts.items);
   const filter = useSelector((state) => state.filter.filter);
   const filteredContacts = contacts?.filter(contact => contact.name.toLowerCase().includes(filter))
